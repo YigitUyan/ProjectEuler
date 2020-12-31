@@ -1,12 +1,11 @@
-
 // Project Euler - Question 18:
 //   By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
 //   3 -> 7 4 -> 2 4 6 -> 8 5 9 3 (That is, 3 + 7 + 4 + 9 = 23.) [Note: The Triangle is a Binary Tree, which the Nodes are the Numbers]
 // Find the maximum total from top to bottom of the triangle below:
 
-public class Question18
-{
-    static String input =
+public class Question18 {
+
+    static String input = "" +
             "75\n" +
             "95 64\n" +
             "17 47 82\n" +
@@ -23,13 +22,12 @@ public class Question18
             "63 66 04 68 89 53 67 30 73 16 69 87 40 31\n" +
             "04 62 98 27 23 09 70 98 73 93 38 53 60 04 23";
 
-    public static void main(String [] _Arguments)
-    {
-        int matrix [][] = Utility.parseMatrixPlus(input);
+    public static void main(String[] _Arguments) {
+        int[][] matrix = Utility.parseMatrixPlus(input);
 
-        for(int row = matrix.length - 2; row >= 0; row--)
-            for(int col = 0; col <= row; col++)
-                    matrix[row][col] = matrix[row][col] + Utility.getMax(matrix[row + 1][col], matrix[row + 1][col + 1]);
+        for (int row = matrix.length - 2; row >= 0; row--)
+            for (int col = 0; col <= row; col++)
+                matrix[row][col] = matrix[row][col] + Utility.getMax(matrix[row + 1][col], matrix[row + 1][col + 1]);
 
         System.out.println("Answer: " + matrix[0][0]);
     }

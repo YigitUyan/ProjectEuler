@@ -1,13 +1,12 @@
-
 // Project Euler - Question 8:
 //   The four adjacent digits in the 1000-digit number that have the greatest product are 9 × 9 × 8 × 9 = 5832.
 // Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
 
 import java.math.BigInteger;
 
-public class Question8
-{
-    static String input =
+public class Question8 {
+
+    static String input = "" +
             "73167176531330624919225119674426574742355349194934" +
             "96983520312774506326239578318016984801869478851843" +
             "85861560789112949495459501737958331952853208805511" +
@@ -29,20 +28,19 @@ public class Question8
             "05886116467109405077541002256983155200055935729725" +
             "71636269561882670428252483600823257530420752963450";
 
-    public static void main(String[] _Arguments)
-    {
+    public static void main(String[] _Arguments) {
         int frameSize = 13;
         BigInteger maxProduct = new BigInteger("0");
 
-        for(int i = 0; i < input.length() - frameSize; i++)
-        {
+        for (int i = 0; i < input.length() - frameSize; i++) {
             BigInteger currentProduct = new BigInteger("1");
-            for(int j = 0; j < frameSize; j++)
+            for (int j = 0; j < frameSize; j++)
                 currentProduct = currentProduct.multiply(new BigInteger(input.substring(i + j, i + j + 1)));
-            if(currentProduct.compareTo(maxProduct) == 1)
+            if (currentProduct.compareTo(maxProduct) == 1)
                 maxProduct = currentProduct;
             Utility.watchProgress(input.length() - frameSize, i);
         }
+
         System.out.println("Answer: " + maxProduct);
     }
 }

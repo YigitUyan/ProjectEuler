@@ -1,10 +1,9 @@
-
 // Project Euler - Question 13:
 // Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
 
-public class Question13
-{
-    static String input =
+public class Question13 {
+
+    static String input = "" +
             "37107287533902102798797998220837590246510135740250\n" +
             "46376937677490009712648124896970078050417018260538\n" +
             "74324986199524741059474233309513058123726617309629\n" +
@@ -106,26 +105,21 @@ public class Question13
             "20849603980134001723930671666823555245252804609722\n" +
             "53503534226472524250874054075591789781264330331690";
 
-    public static void main(String [] _Arguments)
-    {
-        int sumDigits [] = new int[10];
+    public static void main(String[] _Arguments) {
+        int[] sumDigits = new int[10];
         int currentDigit = 0;
         int numberLength = 50;
         int numberCount = 100;
 
-        for(int i = 0; i < numberLength; i++)
-        {
-            for(int j = 0; j < numberCount; j++)
-            {
+        for (int i = 0; i < numberLength; i++) {
+            for (int j = 0; j < numberCount; j++) {
                 int baseAddress = numberLength - i + (numberLength + 1) * j;
                 sumDigits[currentDigit] += Integer.valueOf(input.substring(baseAddress - 1, baseAddress));
             }
 
             int processDigit = currentDigit;
-            while(sumDigits[processDigit] >= 10)
-            {
-                if(processDigit >= sumDigits.length - 1)
-                {
+            while (sumDigits[processDigit] >= 10) {
+                if (processDigit >= sumDigits.length - 1) {
                     Utility.shiftArray(sumDigits, Utility.Direction.RIGHT);
                     currentDigit--;
                     processDigit--;
@@ -135,7 +129,7 @@ public class Question13
                 processDigit++;
             }
 
-            if(currentDigit < sumDigits.length - 1)
+            if (currentDigit < sumDigits.length - 1)
                 currentDigit++;
 
             Utility.watchProgress(numberLength, i);

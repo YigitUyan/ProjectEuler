@@ -1,4 +1,3 @@
-
 // Project Euler - Question 11:
 // In the 20×20 grid below, four numbers along a diagonal line have been marked in red.
 // The product of these numbers is 26 × 63 × 78 × 14 = 1788696.
@@ -6,9 +5,9 @@
 
 import java.math.BigInteger;
 
-public class Question11
-{
-    static String input =
+public class Question11 {
+
+    static String input = "" +
             "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08\n" +
             "49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00\n" +
             "81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65\n" +
@@ -30,48 +29,45 @@ public class Question11
             "20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54\n" +
             "01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48";
 
-    public static void main(String[] _Arguments)
-    {
+    public static void main(String[] _Arguments) {
         int inputWidth = 20;
         int inputHeight = 20;
         int searchWidth = 4;
 
-        int [][] inputArray = Utility.parseMatrix(input);
+        int[][] inputArray = Utility.parseMatrix(input);
         BigInteger greatestProduct = new BigInteger("0");
 
-        for(int row = 0; row < inputHeight; row++)
-        {
-            for(int col = 0; col < inputWidth; col++)
-            {
+        for (int row = 0; row < inputHeight; row++) {
+            for (int col = 0; col < inputWidth; col++) {
                 BigInteger horizontalProduct = new BigInteger("1");
                 BigInteger verticalProduct = new BigInteger("1");
                 BigInteger diagonal1Product = new BigInteger("1");
                 BigInteger diagonal2Product = new BigInteger("1");
 
-                for(int i = 0; i < searchWidth; i++)
-                {
-                    if(col + searchWidth <= inputWidth)
+                for (int i = 0; i < searchWidth; i++) {
+                    if (col + searchWidth <= inputWidth)
                         horizontalProduct = horizontalProduct.multiply(new BigInteger(String.valueOf(inputArray[row][col + i])));
-                    if(row + searchWidth <= inputHeight)
+                    if (row + searchWidth <= inputHeight)
                         verticalProduct = verticalProduct.multiply(new BigInteger(String.valueOf(inputArray[row + i][col])));
-                    if(col + searchWidth <= inputWidth && row + searchWidth <= inputHeight)
+                    if (col + searchWidth <= inputWidth && row + searchWidth <= inputHeight)
                         diagonal1Product = diagonal1Product.multiply(new BigInteger(String.valueOf(inputArray[row + i][col + i])));
-                    if(col + searchWidth <= inputWidth && row - searchWidth >= -1)
+                    if (col + searchWidth <= inputWidth && row - searchWidth >= -1)
                         diagonal2Product = diagonal2Product.multiply(new BigInteger(String.valueOf(inputArray[row - i][col + i])));
                 }
 
-                if(horizontalProduct.compareTo(greatestProduct) == 1)
+                if (horizontalProduct.compareTo(greatestProduct) == 1)
                     greatestProduct = horizontalProduct;
-                if(verticalProduct.compareTo(greatestProduct) == 1)
+                if (verticalProduct.compareTo(greatestProduct) == 1)
                     greatestProduct = verticalProduct;
-                if(diagonal1Product.compareTo(greatestProduct) == 1)
+                if (diagonal1Product.compareTo(greatestProduct) == 1)
                     greatestProduct = diagonal1Product;
-                if(diagonal2Product.compareTo(greatestProduct) == 1)
+                if (diagonal2Product.compareTo(greatestProduct) == 1)
                     greatestProduct = diagonal2Product;
 
                 Utility.watchProgress((inputWidth) * (inputHeight), row * (inputHeight) + col);
             }
         }
+
         System.out.println("Answer: " + greatestProduct);
     }
 }
